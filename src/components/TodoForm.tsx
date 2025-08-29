@@ -1,32 +1,26 @@
 import React from 'react';
-import { useState,useEffect } from 'react';
+import { useState } from 'react';
 import './TodoForm.css';
-import type {Todo}   from '../types';
 
 
-export default function TodoForm() {
+interface TodoFormProps{
+    onAddTodo:(text:string)=>void;
+}
+export default function TodoForm({onAddTodo}:TodoFormProps) {
     const [text, setText] = useState("");
-    const [todos,setTodos]=useState<Todo[]>([]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setText(e.target.value);
     };
-    const AddTodo = () => {
-        const newTodo:Todo={
-            id:Date.now(),
-            text:text.trim(),
-            completed:false
-        }
-        setTodos([...todos, newTodo]);
-        console.log(todos);
+    const handleSubmit=(e:React.FormEvent)=>{
+        e.preventDefault();
+        if(text.trim() === "") return;
+        onAddTodo(text);
         setText("");
-
-    };
-    useEffect(()=>{
-        console.log(todos);
-    },[todos])
+    }
+   
     return (
-        <form className="todo-form" onSubmit={e => { e.preventDefault(); AddTodo(); }}>
+        <form className="todo-form" onSubmit={handleSubmit}>
             <input
                 className="todo-input"
                 placeholder="Enter your Todo task here"
