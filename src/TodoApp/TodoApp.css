@@ -1,0 +1,36 @@
+/* TodoApp.css */
+.todo-app {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.todo-app h3 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  .todo-app {
+    padding: 10px;
+    max-width: 100%;
+  }
+
+  .todo-app h3 {
+    font-size: 1.5em;
+  }
+}
+
+@media (max-width: 480px) {
+  .todo-app {
+    padding: 5px;
+  }
+
+  .todo-app h3 {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+  }
+}
