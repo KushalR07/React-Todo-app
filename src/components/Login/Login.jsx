@@ -1,11 +1,12 @@
 import './Login.css'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../security/Authcontext';
 
 const Login = () => {
 
     const navigate = useNavigate();
-
+    const authContext = useAuth();
     const [username,setUsername] = useState('');
     const [password,setPassword] = useState('');
     const [errorMessage, seterrorMessage]=useState(false);
@@ -13,20 +14,24 @@ const Login = () => {
 
     const handleUsernameChange = (event)=>
     {
-        setUsername(event.target.value);
+        setUsername(prev=>event.target.value);
     }
 
     const handlePasswordChange = (event)=>{
-        setPassword(event.target.value);
+        setPassword(prev=>event.target.value);
 
     }
     const userAuthenticate =()=>{
-        if(username === "Kushal"  && password === "dummy"){
+        const success = authContext.login(username, password);
+        if(success){
             navigate(`/welcome/${username}`);
-        }
-        else{
+        } else {
             seterrorMessage(true);
         }
+    }
+    function handleSubmit(event){
+      event.preventDefault();
+        userAuthenticate();
     }
     
     // function navigateToWelcome(){
@@ -39,7 +44,7 @@ const Login = () => {
       <div className="login-form">
         <h2>Login</h2>
         {errorMessage && <div>Invalid credentials, Please try again.</div>}
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="username">Username:</label>
             <input
@@ -63,7 +68,7 @@ const Login = () => {
           <button
             type="submit"
             className="login-button"
-            onClick={userAuthenticate}
+            autoComplete="off"
           >
             Login
           </button>
