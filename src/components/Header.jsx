@@ -5,9 +5,9 @@ const Header = () => {
   const isAuthenticated = authContext.isAuthenticated;
   const username = authContext.username;
 
-  function logout() {
-    authContext.logout();
-  }
+  // function logout() {
+  //   authContext.logout();
+  // }
   return (
     <header className="border-bottom border-light border-5 p-2">
       <div className="container">
