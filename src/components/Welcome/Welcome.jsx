@@ -19,7 +19,7 @@ const Welcome = () => {
     //     onError(error);
     //   });
 
-    retrievePathVariablebean("Ranga")
+    retrievePathVariablebean(username)
       .then((response) => {
         onSuccess(response);
       })

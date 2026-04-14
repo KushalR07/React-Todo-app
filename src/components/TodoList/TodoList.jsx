@@ -1,25 +1,42 @@
+import { useState, useEffect } from "react";
+import { retirieveTodos } from "../../api/TodoApiService";
 const TodoList =()=>{
 
-    const todos = [
-      {
-        id: 1,
-        description: "Learn React",
-        isDone: false,
-        // TargetDate: new Date(),
-      },
-      {
-        id: 2,
-        description: "Learn Full stack development",
-        isDone: false,
-        // TargetDate: new Date(),
-      },
-      {
-        id: 3,
-        description: "Learn Spring boot",
-        isDone: false,
-        // TargetDate: new Date(),
-      },
-    ];
+  const [todos,setTodos]= useState([]);
+
+  useEffect(()=>{
+    refreshTodos();
+  },[])
+  function refreshTodos(){
+    retirieveTodos("in28minutes")
+    .then((response)=>{
+      console.log(response.data);
+      setTodos(response.data);
+    })
+    .catch((error)=>console.log(error));
+  }
+
+
+    // const todos = [
+    //   {
+    //     id: 1,
+    //     description: "Learn React",
+    //     isDone: false,
+    //     // TargetDate: new Date(),
+    //   },
+    //   {
+    //     id: 2,
+    //     description: "Learn Full stack development",
+    //     isDone: false,
+    //     // TargetDate: new Date(),
+    //   },
+    //   {
+    //     id: 3,
+    //     description: "Learn Spring boot",
+    //     isDone: false,
+    //     // TargetDate: new Date(),
+    //   },
+    // ];
     return (
       <>
         <div className="container mt-5 mb-5">

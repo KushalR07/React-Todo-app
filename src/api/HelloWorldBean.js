@@ -1,8 +1,10 @@
 import axios from "axios";
 
-export  const retriveHelloWorldBean = () =>
-  axios.get("http://localhost:8080/hello-world-bean");
+ const apiCleint=axios.create({
+  baseURL: "http://localhost:8080",
+});
 
-export const retrievePathVariablebean=(name)=>{
-    axios.get(`http://localhost:8080/hello-world/path-variable/${name}`);
-}
+export  const retriveHelloWorldBean = () => apiCleint.get("/hello-world-bean");
+
+export const retrievePathVariablebean = (name) =>
+  apiCleint.get(`/hello-world/path-variable/${name}`);
