@@ -6,6 +6,7 @@ import Header from '../components/Header'
 import Footer from '../components/Footer/Footer'
 import Logout from '../components/Logout'
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import TodoComponent from '../components/TodoList/TodoComponent'
 
 const TodoApp=()=>{
     return (
@@ -19,6 +20,7 @@ const TodoApp=()=>{
             <Route path="*" element={<ErrorComponent />}></Route>
             <Route path='/todos' element={<TodoList/>}></Route>
             <Route  path='/logout' element={<Logout />}/>
+            <Route  path='/todo/:id' element={<TodoComponent />}/>
           </Routes>
           <Footer />
         </Router>
